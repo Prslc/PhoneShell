@@ -1,4 +1,4 @@
-#!/system/bin/bash
+#!/system/bin/sh
 MODDIR="${0%/*}"
 
 # 新的判断系统启动完成方法

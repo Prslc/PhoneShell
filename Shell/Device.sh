@@ -1,4 +1,4 @@
-#!/system/bin/bash
+#!/system/bin/sh
 
 # 检查是否是 root 用户
 if [ "$(whoami)" != "root" ]; then

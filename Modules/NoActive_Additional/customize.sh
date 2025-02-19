@@ -1,4 +1,4 @@
-#!/system/bin/bash
+#!/system/bin/sh
 
 # 拦截 Magisk 为 27005 的版本
 if [[ "$MAGISK_VER_CODE" -eq 27005 && -z "$KSU" && -z "$APATCH" ]]; then
