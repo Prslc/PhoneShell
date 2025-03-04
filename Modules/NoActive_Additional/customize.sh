@@ -18,3 +18,11 @@ if [[ "$KSU" == "true" && "$KSU_VER_CODE" -lt 11422 ]]; then
     ui_print "你的 KernelSU 管理器版本 < 11422 已被拦截"
     abort "Stop installation Module"
 fi
+
+if [ "$KSU" == "true" || "$APATCH" == "true" ];then
+    ui_print "你的管理器支持 WebUi 无需安装其他应用"
+else
+    ui_print "你的管理器不支持 WebUi 需要安装其他应用，例如"
+    ui_print "[1] MMRL (https://github.com/MMRLApp/MMRL)"
+    ui_print "[2] KsuWebUI (https://github.com/5ec1cff/KsuWebUIStandalone)"
+fi
