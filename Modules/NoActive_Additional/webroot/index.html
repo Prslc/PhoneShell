@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全屏文件查看器</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="module" src="index.js"></script>
+</head>
+
+<body>
+    <div id="header">
+        <span>📄 NoActive 日志</span>
+        <button id="refresh">🔄 刷新</button>
+    </div>
+
+    <div id="search-container">
+        <select id="log-level">
+            <option value="">全部</option>
+            <option value="[信息]">信息</option>
+            <option value="[警告]">警告</option>
+            <option value="[错误]">错误</option>
+            <option value="[调试]">调试</option>
+        </select>
+        <input type="text" id="search" placeholder="🔍 搜索日志..." />
+    </div>
+
+    <pre id="output">Loading...</pre>
+</body>
+
+</html>
