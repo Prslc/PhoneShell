@@ -24,7 +24,7 @@ if [ "$logtype" = "file" ]; then
     logpath="$NoActive_file/log"
 else
     logtype="框架"
-    logpath=$(ls /data/adb/lspd/log/module*)
+    logpath=$(ls -t /data/adb/lspd/log/module* | head -n 1)
 fi
 
 # 获取NoActive小版本号
