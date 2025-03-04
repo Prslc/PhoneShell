@@ -19,7 +19,7 @@ if [[ "$KSU" == "true" && "$KSU_VER_CODE" -lt 11422 ]]; then
     abort "Stop installation Module"
 fi
 
-if [ "$KSU" == "true" || "$APATCH" == "true" ];then
+if [[ "$KSU" == "true" || "$APATCH" == "true" ]];then
     ui_print "你的管理器支持 WebUi 无需安装其他应用"
 else
     ui_print "你的管理器不支持 WebUi 需要安装其他应用，例如"
