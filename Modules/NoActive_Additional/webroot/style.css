@@ -76,11 +76,12 @@
         #output {
             background: var(--pre-bg);
             color: var(--pre-text);
-            font-size: 16px;
+            font-size: 14px;
             padding: 15px;
             white-space: pre-wrap;
             word-wrap: break-word;
             overflow: auto;
+            font-family: system-ui;
             height: calc(100vh - 50px);
         }
 
