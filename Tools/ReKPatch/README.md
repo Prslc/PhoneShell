@@ -1,5 +1,10 @@
 # ReKPatch
 
+> [!CAUTION]
+> 该项目已停止在此处更新，请前往新仓库获取最新版本
+>
+> https://github.com/Prslc/ReKPatch
+
 ## 项目介绍
 
 本项目使用 Magiskboot 解包 boot.img 获取 Kernel，并通过 kptools 修补 KPM 为 Kernel 增加 ReKernel KPM 功能。
