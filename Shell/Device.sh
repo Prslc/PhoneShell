@@ -11,7 +11,6 @@ applist="$(pm list packages -3 2>&1 </dev/null)"
 
 # 设备信息
 compile_time=$(uname -v)
-datetime_part=$(echo "$compile_time" | awk '{print $6, $7, $8, $9, $10}')
 time_part=$(echo "$compile_time" | awk '{print $7}')
 Zram=$(cat /sys/block/zram0/comp_algorithm | cut -d '[' -f2 | cut -d ']' -f1)
 
@@ -79,38 +78,9 @@ BasicInformation() {
     echo "安全补丁：$(getprop ro.build.version.security_patch)"
     echo "固件版本：$(getprop persist.sys.grant_version)"
     echo "内核版本：$(uname -r)"
-
-    case $(echo "$compile_time" | awk '{print $5}') in
-    "Jan") chinese_month="1月" ;;
-    "Feb") chinese_month="2月" ;;
-    "Mar") chinese_month="3月" ;;
-    "Apr") chinese_month="4月" ;;
-    "May") chinese_month="5月" ;;
-    "Jun") chinese_month="6月" ;;
-    "Jul") chinese_month="7月" ;;
-    "Aug") chinese_month="8月" ;;
-    "Sep") chinese_month="9月" ;;
-    "Oct") chinese_month="10月" ;;
-    "Nov") chinese_month="11月" ;;
-    "Dec") chinese_month="12月" ;;
-    *) chinese_month="未知" ;;
-    esac
-
-    case $(echo "$compile_time" | awk '{print $4}') in
-    "Mon") chinese_day="星期一" ;;
-    "Tue") chinese_day="星期二" ;;
-    "Wed") chinese_day="星期三" ;;
-    "Thu") chinese_day="星期四" ;;
-    "Fri") chinese_day="星期五" ;;
-    "Sat") chinese_day="星期六" ;;
-    "Sun") chinese_day="星期日" ;;
-    *) chinese_day="未知" ;;
-    esac
-
-    echo "编译时间：$(echo "$compile_time" | awk '{print $9}')年$chinese_month$(echo "$compile_time" | awk '{print $6}')日 $chinese_day $time_part"
     echo "处理器：$(getprop ro.soc.model)"
     echo "ZRAM大小："$(awk 'NR > 1 {size=$3/(1024*1024); printf "%.1fG\n", size}' /proc/swaps) "($Zram)"
-    echo ""
+    echo " "
 }
 
 # 电池寿命
