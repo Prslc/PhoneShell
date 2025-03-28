@@ -123,10 +123,7 @@ Root() {
 
 # 墓碑
 tombstone() {
-    if [ -n "$ReKernel" ]; then
-        ReKernel="$(ls /proc/rekernel 2>/dev/null | head -n 1)"
-        echo "Re:Kernel端口: $ReKernel"
-    fi
+    ReKernel="$(ls /proc/rekernel 2>/dev/null | head -n 1)" && [ -n "$ReKernel" ] && echo "Re:Kernel端口: $ReKernel"
     if echo "$applist" | grep -qw "cn.myflv.noactive"; then
         echo "墓碑：NoActive($NoActive_Version)"
     elif echo "$applist" | grep -qw "com.sidesand.millet"; then
@@ -137,21 +134,10 @@ tombstone() {
         echo "未知的墓碑"
     fi
 
-    if [ -e /sys/fs/cgroup/uid_0/cgroup.freeze ]; then
-        echo "✔️ 已挂载 FreezerV2(UID)"
-    fi
-
-    if [ -e /sys/fs/cgroup/frozen/cgroup.freeze ] && [ -e /sys/fs/cgroup/unfrozen/cgroup.freeze ]; then
-        echo "✔️ 已挂载 FreezerV2(FROZEN)"
-    fi
-
-    if [ -e /dev/cg2_bpf ]; then
-        echo "✔️ 已挂载 FreezerV2 (dev/cg2_bpf)"
-    fi
-
-    if [ -e /sys/fs/cgroup/freezer/perf/frozen/freezer.state ]; then
-        echo "✔️ 已挂载 FreezerV1(FROZEN)"
-    fi
+    [ -e /sys/fs/cgroup/uid_0/cgroup.freeze ] && echo "✔️ 已挂载 FreezerV2(UID)"
+    [ -e /sys/fs/cgroup/frozen/cgroup.freeze ] && [ -e /sys/fs/cgroup/unfrozen/cgroup.freeze ] && echo "✔️ 已挂载 FreezerV2(FROZEN)"
+    [ -e /dev/cg2_bpf ] && echo "✔️ 已挂载 FreezerV2 (dev/cg2_bpf)"
+    [ -e /sys/fs/cgroup/freezer/perf/frozen/freezer.state ] && echo "✔️ 已挂载 FreezerV1(FROZEN)"
 
     if [ ${#v1Info} -gt 2 ]; then
         echo "$v1Info"
