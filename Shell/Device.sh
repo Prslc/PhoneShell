@@ -129,7 +129,6 @@ tombstone() {
     fi
     if echo "$applist" | grep -qw "cn.myflv.noactive"; then
         echo "墓碑：NoActive($NoActive_Version)"
-        echo "NoActive日志输出：$NoActive_logoutput"
     elif echo "$applist" | grep -qw "com.sidesand.millet"; then
         echo "墓碑：SMillet($(GetAppVerison "com.sidesand.millet"))"
     elif [ "$(getprop persist.sys.powmillet.enable)" = "true" ]; then
