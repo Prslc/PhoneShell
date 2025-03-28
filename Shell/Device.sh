@@ -94,18 +94,14 @@ Battery() {
 
 # Root环境
 Root() {
-    if env | grep -qn 'ksu'; then
-        echo "Root：KernelSU($(GetAppVerison "me.weishu.kernelsu"))"
-    elif [ -f "/data/adb/ap/modules.img" ]; then
-        echo "Root：APatch($(GetAppVerison "me.bmax.apatch"))"
-    elif echo "$applist" | grep -qw "com.topjohnwu.magisk"; then
-        echo "Root：Magisk($(GetAppVerison "com.topjohnwu.magisk"))"
-    elif echo "$applist" | grep -qw "io.github.huskydg.magisk"; then
-        echo "Root：Magisk🦊($(GetAppVerison "io.github.huskydg.magisk"))"
-    elif echo "$applist" | grep -qw "io.github.vvb2060.magisk"; then
-        echo "Root：Magisk Alpha($(GetAppVerison "io.github.vvb2060.magisk"))"
+    if su -v | grep -qn 'KernelSU'; then
+        echo "Root：KernelSU ($(su -V))"
+    elif su -v | grep -qn 'MAGISKSU'; then
+        echo "Root：Magisk ($(su -V))" then
+    elif apd -v | grep -qn 'APatch'; then
+        echo "Root：APatch ($(apd -V))"
     else
-        echo "Root：未知"
+        echo "Root: not found"
     fi
 
     i=1
