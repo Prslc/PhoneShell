@@ -168,13 +168,16 @@ tombstone() {
         echo "未知的墓碑"
     fi
 
-
     if [ -e /sys/fs/cgroup/uid_0/cgroup.freeze ]; then
         echo "✔️ 已挂载 FreezerV2(UID)"
     fi
 
     if [ -e /sys/fs/cgroup/frozen/cgroup.freeze ] && [ -e /sys/fs/cgroup/unfrozen/cgroup.freeze ]; then
         echo "✔️ 已挂载 FreezerV2(FROZEN)"
+    fi
+
+    if [ -e /dev/cg2_bpf ]; then
+        echo "✔️ 已挂载 FreezerV2 (dev/cg2_bpf)"
     fi
 
     if [ -e /sys/fs/cgroup/freezer/perf/frozen/freezer.state ]; then
