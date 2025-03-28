@@ -153,12 +153,12 @@ Root() {
 
 # 墓碑
 tombstone() {
+    if [ -n "$ReKernel" ]; then
+        ReKernel="$(ls /proc/rekernel 2>/dev/null | head -n 1)"
+        echo "Re:Kernel端口: $ReKernel"
+    fi
     if echo "$applist" | grep -qw "cn.myflv.noactive"; then
         echo "墓碑：NoActive($NoActive_Version)"
-        ReKernel="$(ls /proc/rekernel 2>/dev/null | head -n 1)"
-        if [ -n "$ReKernel" ]; then
-            echo "Re:Kernel端口: $ReKernel"
-        fi
         echo "NoActive日志输出：$NoActive_logoutput"
     elif echo "$applist" | grep -qw "com.sidesand.millet"; then
         echo "墓碑：SMillet($(GetAppVerison "com.sidesand.millet"))"
@@ -189,7 +189,7 @@ tombstone() {
     fi
 
     if [ ${#status} -gt 2 ]; then
-        echo "🤗 正在使用：$CurrentFreezer"
+        echo "❄️ 正在使用：$CurrentFreezer"
 
         echo "==============[ 冻结状态 ]==============
 $status"
