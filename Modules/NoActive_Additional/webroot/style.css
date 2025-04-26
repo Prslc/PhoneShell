@@ -6,8 +6,6 @@
             --header-text: #000;
             --pre-bg: #ffffff;
             --pre-text: #333;
-            --button-bg: #007bff;
-            --button-hover: #0056b3;
             --border-color: #ccc;
         }
 
@@ -19,9 +17,7 @@
                 --header-bg: #1e1e1e;
                 --header-text: #fff;
                 --pre-bg: #282c34;
-                --pre-text: #99ccff;
-                --button-bg: #0d6efd;
-                --button-hover: #0b5ed7;
+                --pre-text: #ddd;
                 --border-color: #444;
                 caret-color: white;
             }
