@@ -46,11 +46,11 @@ status=$(ps -A | awk '/refrigerator|do_freezer|signal/ {print "😴"$6, $9}')
 
 # 当前使用的冻结方式
 if [[ "$status" == *'refrigerator'* ]]; then
-    CurrentFreezer="FreezerV1(Freezer)"
+    CurrentFreezer="FreezerV1(FROZEN)"
 elif [[ "$status" == *'do_freezer_trap'* ]]; then
     CurrentFreezer='FreezerV2(UID)'
 elif [[ "$status" == *'get_signal'* ]]; then
-    CurrentFreezer='FreezerV2(Freezer)'
+    CurrentFreezer='FreezerV2(FROZEN)'
 elif [[ "$status" == *'do_signal_stop'* ]]; then
     CurrentFreezer='GSTOP'
 else
