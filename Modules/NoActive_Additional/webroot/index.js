@@ -54,9 +54,7 @@ async function loadFile() {
     }
 
     try {
-       // const { errno, stdout, stderr } = await exec(`cat ${filePath}`);
-       // 使用 dd 来读取日志文件避免在调试日志过多的情况下的加载缓慢
-       const { errno, stdout, stderr } = await exec(`dd if=${filePath} bs=1M 2>/dev/null`);
+        const { errno, stdout, stderr } = await exec(`cat ${filePath}`);
         if (errno === 0) {
             let logContent = stdout || "(文件为空)";
 
