@@ -6,6 +6,10 @@
     --pre-bg: #ffffff;
     --pre-text: #333;
     --border-color: #ccc;
+
+    /* MMRL windows */
+    padding-top: var(--window-inset-top);
+    padding-bottom: var(--window-inset-bottom);
 }
 
 /* 深色模式 */
