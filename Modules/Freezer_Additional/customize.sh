@@ -14,7 +14,7 @@ manager_Check() {
         ui_print "[+] 处理器架构： $ARCH"
         ui_print "[+] 安卓版本：$API"
         ui_print "[+] 内核版本：$(uname -r)"
-    elif [ -n "$APATCH"]; then
+    elif [ -n "$APATCH" ]; then
         ui_print "[+] 检测到安装环境为：APatch"
         ui_print "[+] APatch 版本号：$APATCH_VER_CODE"
         ui_print "[+] APatch 版本名：$APATCH_VER"

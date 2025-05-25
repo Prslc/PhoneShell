@@ -1,20 +1,20 @@
 #!system/bin/sh
 
-manager_Check(){
+manager_Check() {
     # 检查 Magisk 版本
     if [ -n "$MAGISK_VER_CODE" ] && [ "$MAGISK_VER_CODE" -eq 27005 ] && [ -z "$KSU" ] && [ -z "$APATCH" ]; then
         ui_print "[x] 检测到 Magisk 版本为 27005，已停止安装"
         ui_print "[x] 请更新 Magisk 之后重新安装该模块"
         abort "Stop installation Module"
     fi
-    if [ -n "$KSU" ];then
+    if [ -n "$KSU" ]; then
         ui_print "[+] 检测到安装环境为：KernelSU"
         ui_print "[+] KerenlSU 内核版本：$KSU_KERNEL_VER_CODE"
         ui_print "[+] KernelSU 管理器版本：$KSU_VER_CODE"
         ui_print "[+] 处理器架构： $ARCH"
         ui_print "[+] 安卓版本：$API"
         ui_print "[+] 内核版本：$(uname -r)"
-    elif [ -n "$APATCH"];then
+    elif [ -n "$APATCH" ]; then
         ui_print "[+] 检测到安装环境为：APatch"
         ui_print "[+] APatch 版本号：$APATCH_VER_CODE"
         ui_print "[+] APatch 版本名：$APATCH_VER"
@@ -45,7 +45,7 @@ get_module_name() {
 }
 
 # 检测 prop 冲突
-conflict_Module(){
+conflict_Module() {
     # 检查是否有冲突的模块
     EXCLUDE_DIRS="NoActive_Additional lib_tombstone"
     PROPS_TO_CHECK="persist.sys.gz.enable persist.vendor.enable.hans"
@@ -83,9 +83,8 @@ conflict_Module(){
     done
 }
 
-
 # 检测 prop 持久化冲突
-persistence_Check(){
+persistence_Check() {
     # 检查持久化设置
     if [ "$(getprop -p persist.sys.gz.enable)" = "true" ]; then
         ui_print "[x] 持久化设置存在问题，这可能导致你无法关闭 Millet"
@@ -96,7 +95,7 @@ persistence_Check(){
     fi
 }
 #
-manager_Webui(){
+manager_Webui() {
     # 检查 WebUI 支持
     if [ "$KSU" = "true" ] || [ "$APATCH" = "true" ]; then
         ui_print "[+] 你的管理器支持 WebUI 无需安装其他应用"
@@ -109,28 +108,27 @@ manager_Webui(){
 
 # 音量键检测
 key_check() {
-  while true; do
-    key_check=$(/system/bin/getevent -qlc 1)
-    key_event=$(echo "$key_check" | awk '{ print $3 }' | grep 'KEY_')
-    key_status=$(echo "$key_check" | awk '{ print $4 }')
-    if [[ "$key_event" == *"KEY_"* && "$key_status" == "DOWN" ]]; then
-      keycheck="$key_event"
-      break
-    fi
-  done
-  while true; do
-    key_check=$(/system/bin/getevent -qlc 1)
-    key_event=$(echo "$key_check" | awk '{ print $3 }' | grep 'KEY_')
-    key_status=$(echo "$key_check" | awk '{ print $4 }')
-    if [[ "$key_event" == *"KEY_"* && "$key_status" == "UP" ]]; then
-      break
-    fi
-  done
-  echo "$keycheck"
+    while true; do
+        key_check=$(/system/bin/getevent -qlc 1)
+        key_event=$(echo "$key_check" | awk '{ print $3 }' | grep 'KEY_')
+        key_status=$(echo "$key_check" | awk '{ print $4 }')
+        if [[ "$key_event" == *"KEY_"* && "$key_status" == "DOWN" ]]; then
+            keycheck="$key_event"
+            break
+        fi
+    done
+    while true; do
+        key_check=$(/system/bin/getevent -qlc 1)
+        key_event=$(echo "$key_check" | awk '{ print $3 }' | grep 'KEY_')
+        key_status=$(echo "$key_check" | awk '{ print $4 }')
+        if [[ "$key_event" == *"KEY_"* && "$key_status" == "UP" ]]; then
+            break
+        fi
+    done
+    echo "$keycheck"
 }
 
-
-main(){
+main() {
     manager_Check
     ui_print "[+] 请按音量键来选择是否进行一次模块冲突检测"
     ui_print "[+] 音量 + 进行冲突检测并安装"
