@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>神秘控制面板</title>
+  <link rel="stylesheet" type="text/css" href="https://mui.kernelsu.org/internal/insets.css" />
+    <link rel="stylesheet" type="text/css" href="https://mui.kernelsu.org/internal/colors.css" />
+  <style>
+    :root {
+      --bg-light: var(--surfaceContainer);
+      --bg-dark: var(--surfaceContainer);
+      --card-light: #ffffff;
+      --card-dark: #2a2a2a;
+      --text-light: #222;
+      --text-dark: #f1f1f1;
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: all 0.3s ease;
+      padding-top: var(--window-inset-top);
+      padding-bottom: var(--window-inset-bottom);
+    }
+
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .mode-toggle {
+      position: fixed;
+      top: 3rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 999;
+      color: inherit;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .card {
+      background-color: var(--surfaceContainer);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: background-color 0.3s;
+    }
+
+    .dark-mode .card {
+      background-color: var(--card-dark);
+    }
+
+    h2 {
+      text-align: center;
+      margin: 0;
+    }
+
+    .button {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      font-size: 16px;
+      background-color: var(--primary);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .button:active {
+      transform: scale(0.96);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .dark-mode .button {
+      background-color: var(--primary);
+      color: black;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <button class="mode-toggle" onclick="toggleMode()">☀️</button>
+
+  <div class="container">
+    <div class="card">
+      <h2>官方面板</h2>
+      <div class="section">
+        <button class="button" onclick="window.open('sm_app/index.html')">应用控制</button>
+        <button class="button" onclick="window.open('http://127.0.0.1:23333')">面板</button>
+        <button class="button" onclick="window.open('https://tpanel.netlify.app')">面板 (xireiki)</button>
+      </div>
+
+      <h2>第三方面板</h2>
+      <div class="section">
+        <button class="button" onclick="window.open('https://yacd.metacubex.one')">Yacd</button>
+        <button class="button" onclick="window.open('https://clash.razord.top')">Razord</button>
+        <button class="button" onclick="window.open('https://d.metacubex.one')">Metacubexd</button>
+        <button class="button" onclick="window.open('https://board.zash.run.place')">Zashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMode() {
+      const body = document.body;
+      const btn = document.querySelector('.mode-toggle');
+      body.classList.toggle('dark-mode');
+      btn.textContent = body.classList.contains('dark-mode') ? '🌙' : '☀️';
+    }
+
+    // 启动时根据系统模式设定
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.body.classList.add("dark-mode");
+      document.querySelector('.mode-toggle').textContent = "🌙";
+    }
+  </script>
+</body>
+</html>
