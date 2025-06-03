@@ -44,19 +44,6 @@ fi
 # 获取目标进程的状态信息
 status=$(ps -A | awk '/refrigerator|do_freezer|signal/ {print "😴"$6, $9}')
 
-# 当前使用的冻结方式
-if [[ "$status" == *'refrigerator'* ]]; then
-    CurrentFreezer="FreezerV1(FROZEN)"
-elif [[ "$status" == *'do_freezer_trap'* ]]; then
-    CurrentFreezer='FreezerV2(UID)'
-elif [[ "$status" == *'get_signal'* ]]; then
-    CurrentFreezer='FreezerV2(FROZEN)'
-elif [[ "$status" == *'do_signal_stop'* ]]; then
-    CurrentFreezer='GSTOP'
-else
-    CurrentFreezer="未知的冻结方式"
-fi
-
 # 替换进程状态
 status=$(echo "$status" | sed \
     -e 's/__refrigerator/ FreezerV1冻结中:/' \
@@ -140,8 +127,6 @@ tombstone() {
     fi
 
     if [ ${#status} -gt 2 ]; then
-        echo "❄️ 正在使用：$CurrentFreezer"
-
         echo "==============[ 冻结状态 ]==============
 $status"
     else
